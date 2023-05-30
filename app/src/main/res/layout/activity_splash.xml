@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f87171"
+    android:background="@color/primary_color"
     tools:context=".Splash">
 
     <ImageView
@@ -37,9 +37,9 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="74dp"
             android:fontFamily="sans-serif-light"
-            android:text="Lakubo"
+            android:text="@string/app_name"
             android:textColor="@color/white"
-            android:textSize="50dp"
+            android:textSize="50sp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="123dp"
             tools:layout_editor_absoluteY="607dp" />
@@ -66,7 +66,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="-10dp"
             android:layout_marginEnd="98dp"
-            android:text="Lapak UMKM Boyolali"
+            android:text="@string/sub_app_name"
             tools:layout_editor_absoluteX="137dp"
             tools:layout_editor_absoluteY="673dp" />
 
