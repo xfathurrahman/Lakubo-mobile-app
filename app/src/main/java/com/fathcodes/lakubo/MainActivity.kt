@@ -52,21 +52,17 @@ class MainActivity : AppCompatActivity() {
         webView.webViewClient = WebViewClient()
         webView.webChromeClient = createWebChromeClient()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            WebView.enableSlowWholeDocumentDraw()
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            android.webkit.WebView.setWebContentsDebuggingEnabled(false)
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            WebView.setWebContentsDebuggingEnabled(true)
-        }
-
         val url = "https://lakubo.shop"
         webView.loadUrl(url)
 
         swipeRefreshLayout.setOnRefreshListener {
             webView.reload()
+            webView.webViewClient = object : WebViewClient() {
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    super.onPageFinished(view, url)
+                    swipeRefreshLayout.isRefreshing = false // Menghentikan animasi refresh setelah WebView selesai dimuat ulang
+                }
+            }
         }
 
         webView.webViewClient = createWebViewClient()
@@ -88,7 +84,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
         // Memeriksa izin WRITE_EXTERNAL_STORAGE secara dinamis
         checkStoragePermission()
     }
@@ -189,7 +184,6 @@ class MainActivity : AppCompatActivity() {
                 return fileName
             }
 
-
             private fun getMimeType(url: String): String {
                 val fileExtension = MimeTypeMap.getFileExtensionFromUrl(url)
                 return MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension)
@@ -197,7 +191,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
     override fun onBackPressed() {
         if (webView.canGoBack()) {
